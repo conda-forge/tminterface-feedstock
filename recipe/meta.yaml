@@ -18,9 +18,10 @@ requirements:
   host:
     - python {{ python_min }}
     - pip
+    - setuptools
   run:
     - python >={{ python_min }}
-    - bytefield ==1.0.2
+    - bytefield =1.0.2
 
 test:
   imports:
