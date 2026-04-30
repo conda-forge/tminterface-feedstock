@@ -1,0 +1,44 @@
+schema_version: 1
+
+context:
+  name: tminterface
+  version: "1.0.2"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/tminterface-${{ version }}.tar.gz
+  sha256: 61c2eabdfc1eb6dc330e6145d825213a01932aab15ed03607c60759b2cc5bdc4
+
+build:
+  number: 3
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - setuptools
+  run:
+    - python >=${{ python_min }}
+    - bytefield =1.0.2
+
+tests:
+  - python:
+      imports:
+        - tminterface
+      pip_check: true
+      python_version: ${{ python_min }}
+
+about:
+  summary: A client for TMInterface, a TrackMania TAS tool
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  homepage: https://github.com/donadigo/TMInterfaceClientPython
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
